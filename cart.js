@@ -9,6 +9,7 @@ const addProduct =()=>{
     quantityField.value = '';
     console.log(quantity);
     displayProduct(product,quantity);
+    saveProductToLocalStorage(product,quantity);
 
 }
 
@@ -19,7 +20,24 @@ const displayProduct =(product,quantity)=>{
    <h4>Product Name: ${product}</h4>
    <h5>Product Quantity: ${quantity}</h5>
    `;
-
-   
    productContainer.appendChild(div);
 }
+
+//shopping cart section;
+const getStoredShoppingCart = () =>{
+    let cart = {};
+    const storedCart = localStorage.getItem('cart');
+    if(storedCart){
+        cart = JSON.parse(storedCart)
+    }
+        return cart;
+}
+
+//save product into local storage;
+
+const saveProductToLocalStorage =(product,quantity)=>{
+    const cart = getStoredShoppingCart();
+    cart[product] = quantity;
+    console.log(cart);
+}
+   
